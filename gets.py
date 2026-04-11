@@ -9,6 +9,3 @@ ls = soup.find_all('a')
 for i in ls:
     queue.put(i.get('href'))
     print(i.get('href'))
-
-
-# print(soup.prettify())
