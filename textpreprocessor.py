@@ -9,7 +9,7 @@ def preprocess_text(text):
     text = re.sub(r'[^\w\s]', '', text)
     
     # Remove numbers
-    text = re.sub(r'\d+', '', text)
+    # text = re.sub(r'\d+', '', text)
     
     # Remove extra whitespace
     text = re.sub(r'\s+', ' ', text).strip()
