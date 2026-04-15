@@ -4,6 +4,8 @@ from collections import deque
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 
+
+
 def get_links(url):
     response = requests.get(url, timeout=5)
     html = response.text
@@ -22,7 +24,7 @@ def get_links(url):
 def same_domain(url, start_url):
     return urlparse(url).netloc == urlparse(start_url).netloc
 
-def crawl(start_url, max_pages=50):
+def crawl(start_url, max_pages=1000):
     visited = set()
     queue = deque([start_url])
     pages = {}
@@ -41,6 +43,9 @@ def crawl(start_url, max_pages=50):
         visited.add(url)
         pages[url] = html
         print(f"Crawling ({len(visited)}/{max_pages}): {url}")
+
+        with open("urls.txt", "a", encoding="utf-8") as url_file:
+            url_file.write(url + "\n")
 
         for link in links:
             if link not in visited and same_domain(link, start_url):
